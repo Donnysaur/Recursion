@@ -1,1 +1,19 @@
+/*Write a C++ program to find the frequency of each element in a sorted array containing duplicates using recursion
+ The user must input the size of the Array and what is inside the array
+ Sample Output: If the array given is: int arr[]= {1, 2, 2, 3, 4, 4, 4, 5, 5,};
+1 appears 1 time(s)
+2 appears 2 time(s)
+3 appears 1 time(s)
+4 appears 3 time(s)
+5 appears 2 time(s)
+*/
 
+#include <iostream>
+using namespace std;
+
+int main() {
+	int input;
+	int size;
+
+	int arr[] = {};
+}
