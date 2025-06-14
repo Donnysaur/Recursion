@@ -1,31 +1,39 @@
 #include <iostream>
 using namespace std;
 
-// Check if element already appeared before
-bool isVisited(int arr[], int index, int current) {
-    if (index >= current)
-        return false;
-    if (arr[index] == arr[current])
-        return true;
-    return isVisited(arr, index + 1, current);
+// Recursive function to check if the element at 'index' has already been counted
+bool isAlreadyCounted(int arr[], int index, int current) {
+    if (index >= current) return false;
+    if (arr[index] == arr[current]) return true;
+    return isAlreadyCounted(arr, index + 1, current);
 }
 
-// Count frequency of a specific element recursively
-int countFrequency(int arr[], int n, int element, int index = 0) {
-    if (index >= n)
-        return 0;
-    return (arr[index] == element) + countFrequency(arr, n, element, index + 1);
+// Recursive function to count how many times 'value' appears
+int countOccurrences(int arr[], int n, int value, int index = 0) {
+    if (index >= n) return 0;
+    return (arr[index] == value) + countOccurrences(arr, n, value, index + 1);
 }
 
-// Display frequency of each unique element
+// Recursive function to display frequency of each unique element
 void displayFrequencies(int arr[], int n, int index = 0) {
-    if (index >= n)
-        return;
-    if (!isVisited(arr, 0, index)) {
-        int freq = countFrequency(arr, n, arr[index]);
+    if (index >= n) return;
+
+    if (!isAlreadyCounted(arr, 0, index)) {
+        int freq = countOccurrences(arr, n, arr[index]);
         cout << arr[index] << " appears " << freq << " time(s)" << endl;
     }
     displayFrequencies(arr, n, index + 1);
+}
+
+// Recursive input validation for choice
+int getValidChoice() {
+    int choice;
+    cin >> choice;
+    if (choice != 1 && choice != 2) {
+        cout << "Invalid choice. Please enter 1 or 2: ";
+        return getValidChoice();
+    }
+    return choice;
 }
 
 int main() {
@@ -39,12 +47,12 @@ int main() {
     }
 
     int* arr = new int[size];
-    cout << "Enter " << size << " elements: " << endl;
+    cout << "Enter " << size << " elements:" << endl;
     for (int i = 0; i < size; ++i) {
         cin >> arr[i];
     }
 
-    cout << "\nFrequencies of elements:\n";
+    cout << "\nFrequencies of elements:" << endl;
     displayFrequencies(arr, size);
 
     int choice;
@@ -53,23 +61,16 @@ int main() {
         cout << "\nEnter element to find its frequency: ";
         cin >> target;
 
-        int freq = countFrequency(arr, size, target);
+        int freq = countOccurrences(arr, size, target);
         if (freq > 0) {
             cout << target << " appears " << freq << " time(s)" << endl;
         } else {
             cout << target << " is not in the array." << endl;
         }
 
-        cout << "\nDo you want to:\n";
-        cout << "1 = Find other elements\n";
-        cout << "2 = End the code\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+        cout << "\nDo you want to:\n1 = Find other elements\n2 = End the code\nEnter your choice: ";
+        choice = getValidChoice();
 
-        while (choice != 1 && choice != 2) {
-            cout << "Invalid choice. Enter 1 or 2: ";
-            cin >> choice;
-        }
     } while (choice == 1);
 
     delete[] arr;
