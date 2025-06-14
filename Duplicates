@@ -1,54 +1,52 @@
-/*Write a C++ program to find the frequency of each element in a sorted array containing duplicates using recursion
- The user must input the size of the Array and what is inside the array
- Sample Output: If the array given is: int arr[]= {1, 2, 2, 3, 4, 4, 4, 5, 5,};
-1 appears 1 time(s)
-2 appears 2 time(s)
-3 appears 1 time(s)
-4 appears 3 time(s)
-5 appears 2 time(s)
-*/
-
 #include <iostream>
 using namespace std;
 
-// Recursive function to print frequencies
+//Function of the the no. that appear many time(s)
 void countFrequency(int arr[], int n, int index = 0) {
-    // Base case: if index reaches the end
-    if (index >= n)
-        return;
+	if (index >= n)
+		return;
 
-    int count = 1;
-    // Count duplicates
-    while (index + count < n && arr[index] == arr[index + count]) {
-        count++;
-    }
+	int count = 1;
+	while (index + count < n && arr[index] == arr[index + count]) {
+		count++;
+	}
+	cout << arr[index] << " appears " << count << " time(s)" << endl;
 
-    cout << arr[index] << " appears " << count << " time(s)" << endl;
-
-    // Recursive call for next unique element
-    countFrequency(arr, n, index + count);
+	countFrequency(arr, n, index + count);
 }
 
 int main() {
-    int size;
+	int size;
 
-    cout << "Enter the size of the array: ";
-    cin >> size;
+	//size of the array
+	cout << "Enter the size of the array: ";
+	cin >> size;
 
-    if (size <= 0) {
-        cout << "Invalid array size!" << endl;
-        return 1;
-    }
+	if (size <= 0) {
+		cout << "Invalid array size!" << endl;
+		return 1;
+	}
 
-    int* arr = new int[size];
-    cout << "Enter " << size << " sorted elements (may include duplicates):" << endl;
-    for (int i = 0; i < size; ++i) {
-        cin >> arr[i];
-    }
+	//display of the array containing the elements
+	int* arr = new int[size];
+	cout << "Enter " << size << " sorted elements: " << endl;
+	for (int i = 0; i < size; ++i) {
+		cin >> arr[i];
+	}
+	cout << size << " Frequencies of elements:" << endl;
+	countFrequency(arr, size);
 
-    cout << "Frequencies of elements:" << endl;
-    countFrequency(arr, size);
-
-    delete[] arr; // Clean up dynamic memory
-    return 0;
+	delete[] arr;
+	return 0;
 }
+
+/*
+if user input the same number but in separe in should still count as how many times
+for example user input size of the array: 7
+in the array: 5 6 5 5 7 7 3
+
+5 appears 3 time(s)
+6 appears 1 time(s)
+7 appears 2 time(s)
+3 appears 1 time(s)
+*/
