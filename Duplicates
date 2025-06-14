@@ -49,4 +49,15 @@ in the array: 5 6 5 5 7 7 3
 6 appears 1 time(s)
 7 appears 2 time(s)
 3 appears 1 time(s)
+
+after fixing this
+user must input what he/she want the element to find and then it should appear like 5 appears 3 time(s) only
+if user put invalid or the number is not on the array
+it should still ask want to find other elements or end the code?
+int 1 = find other elements
+int 2 = end the code
+
+then the user can choose 2 options, want to find other elements or end the code?
+int 1 = find other elements
+int 2 = end the code
 */
